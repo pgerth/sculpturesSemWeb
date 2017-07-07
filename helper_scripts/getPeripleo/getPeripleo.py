@@ -2,7 +2,8 @@
 #
 # The script is used to get a detailed result from the Peripleo API.
 # It takes a search term, askes for the hits and extracts all the metadata
-# attached to it.
+# attached to it. The json will be transformed to geojson and exported
+# into an geojson file, named after the query string.
 #
 # Parameters:
 # -q --query= Obligatory parameter with the search term
@@ -20,9 +21,8 @@ import requests
 from urllib.parse import quote
 
 # Function to extract all places associated with query term and receives for
-# every
-# place the full
-def getPeResult(peReq):
+# every place the full metadata and geometry
+def getPeResult(peReq, query):
     placeList = []
     peRequest = requests.get(peReq).json()
     # single request for every hit, e.g. http://pelagios.org/peripleo/places/http:%2F%2Fpleiades.stoa.org%2Fplaces%2F981516?prettyprint=true
@@ -31,24 +31,26 @@ def getPeResult(peReq):
         placeReq = "http://pelagios.org/peripleo/places/" + quote(number["identifier"], safe='')
         place = requests.get(placeReq).json()
         placeList.append(place.copy())
-        json2Geojson(placeList)
-#    with open('places.json', 'w') as fp:
-#        json.dump(placeList, fp)
+        json2Geojson(placeList, query)
 
-def json2Geojson(placeList):
+# Function to transform json into geojson
+def json2Geojson(placeList, query):
     geojson = {}
     geojson["type"] = "FeatureCollection"
     geojson["features"] = []
 
     for feature in placeList:
-        place = {}
-        place["geometry"] = feature["geometry"]
-        place["properties"] = {}
-        for key, value in feature.items():
-            if key not in ('geometry'):
-                place["properties"][key] = value
-        geojson["features"].append(place)
-    with open('places.json', 'w') as fp:
+        try:
+            place = {}
+            place["geometry"] = feature["geometry"]
+            place["properties"] = {}
+            for key, value in feature.items():
+                if key not in ('geometry'):
+                    place["properties"][key] = value
+            geojson["features"].append(place)
+        except KeyError:
+            print("Missing geometry!")
+    with open(query + '.json', 'w') as fp:
         json.dump(geojson, fp)
 
 # main function, for request parameter handling
@@ -79,7 +81,7 @@ def main(argv):
         peReq = peReq + "&limit=" + limit
 
     print(peReq)
-    getPeResult(peReq)
+    getPeResult(peReq, query)
 
 if __name__ == "__main__":
     main(sys.argv[1:])
