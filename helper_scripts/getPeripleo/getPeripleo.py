@@ -31,10 +31,25 @@ def getPeResult(peReq):
         placeReq = "http://pelagios.org/peripleo/places/" + quote(number["identifier"], safe='')
         place = requests.get(placeReq).json()
         placeList.append(place.copy())
-    with open('places.json', 'w') as fp:
-        json.dump(placeList, fp)
-    
+        json2Geojson(placeList)
+#    with open('places.json', 'w') as fp:
+#        json.dump(placeList, fp)
 
+def json2Geojson(placeList):
+    geojson = {}
+    geojson["type"] = "FeatureCollection"
+    geojson["features"] = []
+
+    for feature in placeList:
+        place = {}
+        place["geometry"] = feature["geometry"]
+        place["properties"] = {}
+        for key, value in feature.items():
+            if key not in ('geometry'):
+                place["properties"][key] = value
+        geojson["features"].append(place)
+    with open('places.json', 'w') as fp:
+        json.dump(geojson, fp)
 
 # main function, for request parameter handling
 def main(argv):
