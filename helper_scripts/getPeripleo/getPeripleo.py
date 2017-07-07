@@ -19,7 +19,9 @@ import json
 import requests
 from urllib.parse import quote
 
-# Function to extract all entrys associated with provinces
+# Function to extract all places associated with query term and receives for
+# every
+# place the full
 def getPeResult(peReq):
     placeList = []
     peRequest = requests.get(peReq).json()
@@ -29,17 +31,10 @@ def getPeResult(peReq):
         placeReq = "http://pelagios.org/peripleo/places/" + quote(number["identifier"], safe='')
         place = requests.get(placeReq).json()
         placeList.append(place.copy())
-    print(json.dumps(placeList))
-'''
-with open('gaz.csv', newline='') as csvfile:
-    csvReader = csv.reader(csvfile, delimiter=',')
-    f = open('myfile.rdf', 'w')
-    for row in csvReader:
-        print(row[0])
-        getGazRdf(row[0])
+    with open('places.json', 'w') as fp:
+        json.dump(placeList, fp)
+    
 
-    f.close()
-'''
 
 # main function, for request parameter handling
 def main(argv):
