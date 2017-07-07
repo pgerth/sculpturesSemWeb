@@ -6,46 +6,70 @@
 #
 # Parameters:
 # -q --query= Obligatory parameter with the search term
-# -t --type= Optional parameter for limiting the result to a specific type:
-#  place, item, dataset
+# -l --limit= Optional parameter for limiting the result, default = 20
 #
 # Example:
 #
-# python getPeripleo.py -q 'province' -t 'place/'
+# python3 getPeripleo.py -q 'province' -t 'place'
 
 import sys, getopt
-import requests
-import csv
+import os
+import logging
 import json
-
+import requests
+from urllib.parse import quote
 
 # Function to extract all entrys associated with provinces
 def getPeResult(peReq):
-    peRequest = requests.get(peReq)
-    print(peRequest)
-    f.write(str(peRequest.json))
+    placeList = []
+    peRequest = requests.get(peReq).json()
+    # single request for every hit, e.g. http://pelagios.org/peripleo/places/http:%2F%2Fpleiades.stoa.org%2Fplaces%2F981516?prettyprint=true
+    for number in peRequest["items"]:
+        print(number["identifier"])
+        placeReq = "http://pelagios.org/peripleo/places/" + quote(number["identifier"], safe='')
+        place = requests.get(placeReq).json()
+        placeList.append(place.copy())
+    print(json.dumps(placeList))
+'''
+with open('gaz.csv', newline='') as csvfile:
+    csvReader = csv.reader(csvfile, delimiter=',')
+    f = open('myfile.rdf', 'w')
+    for row in csvReader:
+        print(row[0])
+        getGazRdf(row[0])
 
+    f.close()
+'''
+
+# main function, for request parameter handling
 def main(argv):
     query = ''
-    qType = ''
-    helpText = 'getPeripleo.py -q <query> [-t <type>]'
+    limit = ''
+    helpText = 'getPeripleo.py -q <query> [-l <limit>]'
 
+    # request parameter handling
     try:
-        opts, args = getopt.getopt(argv,"hq:t:",["query=","type="])
+        opts, args = getopt.getopt(argv,"hq:l:",["query=","limit="])
     except getopt.GetoptError:
-        print helpText
+        print(helpText)
         sys.exit(2)
 
     for opt, arg in opts:
         if opt == '-h':
-            print helpText
+            print(helpText)
             sys.exit()
         elif opt in ("-q", "--query"):
             query = arg
-        elif opt in ("-t", "--type"):
-            qType = arg
+        elif opt in ("-l", "--limit"):
+            limit = arg
 
-    if csvFile != "":
-        print 'Csv input file is: ', csvFile
-        createFileDict(targetDir, fileType, fileDict)
-        metadataByCsv(csvFile, targetDir, fileDict)
+    # build request, e.g. http://pelagios.org/peripleo/search?query=province&type=place&limit=400&prettyprint=true
+    peReq = 'http://pelagios.org/peripleo/search?query=' + query + "&type=place"
+    if limit != "":
+        peReq = peReq + "&limit=" + limit
+
+    print(peReq)
+    getPeResult(peReq)
+
+if __name__ == "__main__":
+    main(sys.argv[1:])
