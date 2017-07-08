@@ -1,0 +1,406 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix dcam: <http://purl.org/dc/dcam/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix geo: <http://www.opengis.net/ont/geosparql#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rr: <http://www.w3.org/ns/r2rml#> .
+@prefix km-dev: <http://isi.edu/integration/karma/dev#> .
+
+_:node1bkguht02x1 a km-dev:R2RMLMapping ;
+	km-dev:sourceName "provinces.csv" ;
+	km-dev:modelPublicationTime "1499512501251"^^xsd:long ;
+	km-dev:modelVersion "1.7" ;
+	km-dev:hasInputColumns "[[{\"columnName\":\"title\"}],[{\"columnName\":\"WKT\"}],[{\"columnName\":\"identifier\"}],[{\"columnName\":\"description\"}]]" ;
+	km-dev:hasOutputColumns "[[{\"columnName\":\"title\"}],[{\"columnName\":\"WKT\"}],[{\"columnName\":\"identifier\"}],[{\"columnName\":\"description\"}]]" ;
+	km-dev:hasModelLabel "provinces.csv" ;
+	km-dev:hasWorksheetHistory """[
+    {
+        \"commandName\": \"SetMetaPropertyCommand\",
+        \"model\": \"new\",
+        \"inputParameters\": [
+            {
+                \"name\": \"hNodeId\",
+                \"type\": \"hNodeId\",
+                \"value\": [{\"columnName\": \"identifier\"}]
+            },
+            {
+                \"name\": \"worksheetId\",
+                \"type\": \"worksheetId\",
+                \"value\": \"W\"
+            },
+            {
+                \"name\": \"selectionName\",
+                \"type\": \"other\",
+                \"value\": \"DEFAULT_TEST\"
+            },
+            {
+                \"name\": \"metaPropertyName\",
+                \"type\": \"other\",
+                \"value\": \"isUriOfClass\"
+            },
+            {
+                \"name\": \"metaPropertyUri\",
+                \"type\": \"other\",
+                \"value\": \"http://www.cidoc-crm.org/cidoc-crm/E53_Place\"
+            },
+            {
+                \"name\": \"metaPropertyId\",
+                \"type\": \"other\",
+                \"value\": \"http://www.cidoc-crm.org/cidoc-crm/E53_Place1\"
+            },
+            {
+                \"name\": \"trainAndShowUpdates\",
+                \"type\": \"other\",
+                \"value\": true
+            },
+            {
+                \"name\": \"rdfLiteralType\",
+                \"type\": \"other\",
+                \"value\": \"\"
+            },
+            {
+                \"name\": \"language\",
+                \"type\": \"other\",
+                \"value\": \"\"
+            },
+            {
+                \"name\": \"inputColumns\",
+                \"type\": \"hNodeIdList\",
+                \"value\": \"[{\\\"value\\\":[{\\\"columnName\\\":\\\"identifier\\\"}]}]\"
+            },
+            {
+                \"name\": \"outputColumns\",
+                \"type\": \"hNodeIdList\",
+                \"value\": \"[{\\\"value\\\":[{\\\"columnName\\\":\\\"identifier\\\"}]}]\"
+            }
+        ],
+        \"tags\": [\"SemanticType\"]
+    },
+    {
+        \"commandName\": \"SetSemanticTypeCommand\",
+        \"model\": \"new\",
+        \"inputParameters\": [
+            {
+                \"name\": \"hNodeId\",
+                \"type\": \"hNodeId\",
+                \"value\": [{\"columnName\": \"WKT\"}]
+            },
+            {
+                \"name\": \"worksheetId\",
+                \"type\": \"worksheetId\",
+                \"value\": \"W\"
+            },
+            {
+                \"name\": \"selectionName\",
+                \"type\": \"other\",
+                \"value\": \"DEFAULT_TEST\"
+            },
+            {
+                \"name\": \"SemanticTypesArray\",
+                \"type\": \"other\",
+                \"value\": [{
+                    \"DomainUri\": \"http://www.opengis.net/ont/geosparql#Geometry\",
+                    \"DomainId\": \"http://www.opengis.net/ont/geosparql#Geometry1\",
+                    \"isPrimary\": true,
+                    \"FullType\": \"http://www.opengis.net/ont/geosparql#asWKT\",
+                    \"DomainLabel\": \"Geometry1\"
+                }]
+            },
+            {
+                \"name\": \"trainAndShowUpdates\",
+                \"type\": \"other\",
+                \"value\": true
+            },
+            {
+                \"name\": \"rdfLiteralType\",
+                \"type\": \"other\",
+                \"value\": \"\"
+            },
+            {
+                \"name\": \"language\",
+                \"type\": \"other\",
+                \"value\": \"\"
+            },
+            {
+                \"name\": \"inputColumns\",
+                \"type\": \"hNodeIdList\",
+                \"value\": \"[{\\\"value\\\":[{\\\"columnName\\\":\\\"WKT\\\"}]}]\"
+            },
+            {
+                \"name\": \"outputColumns\",
+                \"type\": \"hNodeIdList\",
+                \"value\": \"[{\\\"value\\\":[{\\\"columnName\\\":\\\"WKT\\\"}]}]\"
+            }
+        ],
+        \"tags\": [\"SemanticType\"]
+    },
+    {
+        \"commandName\": \"SetSemanticTypeCommand\",
+        \"model\": \"new\",
+        \"inputParameters\": [
+            {
+                \"name\": \"hNodeId\",
+                \"type\": \"hNodeId\",
+                \"value\": [{\"columnName\": \"description\"}]
+            },
+            {
+                \"name\": \"worksheetId\",
+                \"type\": \"worksheetId\",
+                \"value\": \"W\"
+            },
+            {
+                \"name\": \"selectionName\",
+                \"type\": \"other\",
+                \"value\": \"DEFAULT_TEST\"
+            },
+            {
+                \"name\": \"SemanticTypesArray\",
+                \"type\": \"other\",
+                \"value\": [{
+                    \"DomainUri\": \"http://www.cidoc-crm.org/cidoc-crm/E53_Place\",
+                    \"DomainId\": \"http://www.cidoc-crm.org/cidoc-crm/E53_Place1\",
+                    \"isPrimary\": true,
+                    \"FullType\": \"http://www.cidoc-crm.org/cidoc-crm/P3_has_note\",
+                    \"DomainLabel\": \"E53_Place1\"
+                }]
+            },
+            {
+                \"name\": \"trainAndShowUpdates\",
+                \"type\": \"other\",
+                \"value\": true
+            },
+            {
+                \"name\": \"rdfLiteralType\",
+                \"type\": \"other\",
+                \"value\": \"\"
+            },
+            {
+                \"name\": \"language\",
+                \"type\": \"other\",
+                \"value\": \"\"
+            },
+            {
+                \"name\": \"inputColumns\",
+                \"type\": \"hNodeIdList\",
+                \"value\": \"[{\\\"value\\\":[{\\\"columnName\\\":\\\"description\\\"}]}]\"
+            },
+            {
+                \"name\": \"outputColumns\",
+                \"type\": \"hNodeIdList\",
+                \"value\": \"[{\\\"value\\\":[{\\\"columnName\\\":\\\"description\\\"}]}]\"
+            }
+        ],
+        \"tags\": [\"SemanticType\"]
+    },
+    {
+        \"commandName\": \"SetSemanticTypeCommand\",
+        \"model\": \"new\",
+        \"inputParameters\": [
+            {
+                \"name\": \"hNodeId\",
+                \"type\": \"hNodeId\",
+                \"value\": [{\"columnName\": \"title\"}]
+            },
+            {
+                \"name\": \"worksheetId\",
+                \"type\": \"worksheetId\",
+                \"value\": \"W\"
+            },
+            {
+                \"name\": \"selectionName\",
+                \"type\": \"other\",
+                \"value\": \"DEFAULT_TEST\"
+            },
+            {
+                \"name\": \"SemanticTypesArray\",
+                \"type\": \"other\",
+                \"value\": [{
+                    \"DomainUri\": \"http://www.cidoc-crm.org/cidoc-crm/E53_Place\",
+                    \"DomainId\": \"http://www.cidoc-crm.org/cidoc-crm/E53_Place1\",
+                    \"isPrimary\": true,
+                    \"FullType\": \"http://www.cidoc-crm.org/cidoc-crm/P1_is_identified_by\",
+                    \"DomainLabel\": \"E53_Place1\"
+                }]
+            },
+            {
+                \"name\": \"trainAndShowUpdates\",
+                \"type\": \"other\",
+                \"value\": true
+            },
+            {
+                \"name\": \"rdfLiteralType\",
+                \"type\": \"other\",
+                \"value\": \"\"
+            },
+            {
+                \"name\": \"language\",
+                \"type\": \"other\",
+                \"value\": \"\"
+            },
+            {
+                \"name\": \"inputColumns\",
+                \"type\": \"hNodeIdList\",
+                \"value\": \"[{\\\"value\\\":[{\\\"columnName\\\":\\\"title\\\"}]}]\"
+            },
+            {
+                \"name\": \"outputColumns\",
+                \"type\": \"hNodeIdList\",
+                \"value\": \"[{\\\"value\\\":[{\\\"columnName\\\":\\\"title\\\"}]}]\"
+            }
+        ],
+        \"tags\": [\"SemanticType\"]
+    },
+    {
+        \"commandName\": \"AddLinkCommand\",
+        \"model\": \"new\",
+        \"inputParameters\": [
+            {
+                \"name\": \"worksheetId\",
+                \"type\": \"worksheetId\",
+                \"value\": \"W\"
+            },
+            {
+                \"name\": \"edge\",
+                \"type\": \"other\",
+                \"value\": {
+                    \"edgeTargetId\": \"http://www.opengis.net/ont/geosparql#Geometry1\",
+                    \"edgeId\": \"http://www.opengis.net/ont/geosparql#hasGeometry\",
+                    \"edgeTargetUri\": \"http://www.opengis.net/ont/geosparql#Geometry\",
+                    \"edgeSourceId\": \"http://www.cidoc-crm.org/cidoc-crm/E53_Place1\",
+                    \"edgeSourceUri\": \"http://www.cidoc-crm.org/cidoc-crm/E53_Place\"
+                }
+            },
+            {
+                \"name\": \"inputColumns\",
+                \"type\": \"hNodeIdList\",
+                \"value\": \"[]\"
+            },
+            {
+                \"name\": \"outputColumns\",
+                \"type\": \"hNodeIdList\",
+                \"value\": \"[]\"
+            }
+        ],
+        \"tags\": [\"Modeling\"]
+    }
+]""" .
+
+km-dev:TriplesMap_a994806d-c294-42dd-948e-c048b4a74111 a rr:TriplesMap .
+
+_:node1bkguht02x1 km-dev:hasTriplesMap km-dev:TriplesMap_a994806d-c294-42dd-948e-c048b4a74111 .
+
+km-dev:TriplesMap_a994806d-c294-42dd-948e-c048b4a74111 km-dev:isPartOfMapping _:node1bkguht02x1 .
+
+_:node1bkguht02x2 rr:tableName "provinces.csv" ;
+	a rr:LogicalTable ;
+	km-dev:isPartOfMapping _:node1bkguht02x1 .
+
+_:node1bkguht02x1 km-dev:hasLogicalTable _:node1bkguht02x2 .
+
+km-dev:TriplesMap_a994806d-c294-42dd-948e-c048b4a74111 rr:logicalTable _:node1bkguht02x2 ;
+	rr:subjectMap _:node1bkguht02x3 .
+
+_:node1bkguht02x1 km-dev:hasSubjectMap _:node1bkguht02x3 .
+
+_:node1bkguht02x3 km-dev:isPartOfMapping _:node1bkguht02x1 ;
+	a rr:SubjectMap ;
+	km-dev:alignmentNodeId "http://www.cidoc-crm.org/cidoc-crm/E53_Place1" ;
+	rr:class <http://www.cidoc-crm.org/cidoc-crm/E53_Place> ;
+	rr:template "{identifier}" ;
+	a km-dev:steinerTreeRootNode .
+
+km-dev:PredicateObjectMap_7cae26e7-eb9f-49a9-84bc-584aaf916125 rr:predicate <http://www.cidoc-crm.org/cidoc-crm/P3_has_note> .
+
+_:node1bkguht02x4 rr:column "description" ;
+	a rr:ObjectMap ;
+	km-dev:isPartOfMapping _:node1bkguht02x1 .
+
+_:node1bkguht02x1 km-dev:hasObjectMap _:node1bkguht02x4 .
+
+km-dev:PredicateObjectMap_7cae26e7-eb9f-49a9-84bc-584aaf916125 rr:objectMap _:node1bkguht02x4 .
+
+km-dev:TriplesMap_a994806d-c294-42dd-948e-c048b4a74111 rr:predicateObjectMap km-dev:PredicateObjectMap_7cae26e7-eb9f-49a9-84bc-584aaf916125 .
+
+km-dev:PredicateObjectMap_7cae26e7-eb9f-49a9-84bc-584aaf916125 a rr:PredicateObjectMap ;
+	km-dev:isPartOfMapping _:node1bkguht02x1 .
+
+_:node1bkguht02x1 km-dev:hasPredicateObjectMap km-dev:PredicateObjectMap_7cae26e7-eb9f-49a9-84bc-584aaf916125 .
+
+km-dev:PredicateObjectMap_2e77a8c6-04df-4663-9499-053f44fd4ddd rr:predicate geo:hasGeometry .
+
+km-dev:RefObjectMap_ecfddb3c-2aba-4b20-8c8d-ada34b17a61f a rr:RefObjectMap , rr:ObjectMap ;
+	rr:parentTriplesMap km-dev:TriplesMap_fd1f0f7d-5eab-4589-8e79-c7a932c9c12f ;
+	km-dev:isPartOfMapping _:node1bkguht02x1 .
+
+_:node1bkguht02x1 km-dev:hasObjectMap km-dev:RefObjectMap_ecfddb3c-2aba-4b20-8c8d-ada34b17a61f .
+
+km-dev:PredicateObjectMap_2e77a8c6-04df-4663-9499-053f44fd4ddd rr:objectMap km-dev:RefObjectMap_ecfddb3c-2aba-4b20-8c8d-ada34b17a61f .
+
+km-dev:TriplesMap_a994806d-c294-42dd-948e-c048b4a74111 rr:predicateObjectMap km-dev:PredicateObjectMap_2e77a8c6-04df-4663-9499-053f44fd4ddd .
+
+km-dev:PredicateObjectMap_2e77a8c6-04df-4663-9499-053f44fd4ddd a rr:PredicateObjectMap ;
+	km-dev:isPartOfMapping _:node1bkguht02x1 .
+
+_:node1bkguht02x1 km-dev:hasPredicateObjectMap km-dev:PredicateObjectMap_2e77a8c6-04df-4663-9499-053f44fd4ddd .
+
+km-dev:PredicateObjectMap_d5f8e2c2-9784-45e6-89db-33eafe917e7c rr:predicate <http://www.cidoc-crm.org/cidoc-crm/P1_is_identified_by> .
+
+_:node1bkguht02x5 rr:column "title" ;
+	a rr:ObjectMap ;
+	km-dev:isPartOfMapping _:node1bkguht02x1 .
+
+_:node1bkguht02x1 km-dev:hasObjectMap _:node1bkguht02x5 .
+
+km-dev:PredicateObjectMap_d5f8e2c2-9784-45e6-89db-33eafe917e7c rr:objectMap _:node1bkguht02x5 .
+
+km-dev:TriplesMap_a994806d-c294-42dd-948e-c048b4a74111 rr:predicateObjectMap km-dev:PredicateObjectMap_d5f8e2c2-9784-45e6-89db-33eafe917e7c .
+
+km-dev:PredicateObjectMap_d5f8e2c2-9784-45e6-89db-33eafe917e7c a rr:PredicateObjectMap ;
+	km-dev:isPartOfMapping _:node1bkguht02x1 .
+
+_:node1bkguht02x1 km-dev:hasPredicateObjectMap km-dev:PredicateObjectMap_d5f8e2c2-9784-45e6-89db-33eafe917e7c .
+
+km-dev:TriplesMap_fd1f0f7d-5eab-4589-8e79-c7a932c9c12f a rr:TriplesMap .
+
+_:node1bkguht02x1 km-dev:hasTriplesMap km-dev:TriplesMap_fd1f0f7d-5eab-4589-8e79-c7a932c9c12f .
+
+km-dev:TriplesMap_fd1f0f7d-5eab-4589-8e79-c7a932c9c12f km-dev:isPartOfMapping _:node1bkguht02x1 .
+
+_:node1bkguht02x6 rr:tableName "provinces.csv" ;
+	a rr:LogicalTable ;
+	km-dev:isPartOfMapping _:node1bkguht02x1 .
+
+_:node1bkguht02x1 km-dev:hasLogicalTable _:node1bkguht02x6 .
+
+km-dev:TriplesMap_fd1f0f7d-5eab-4589-8e79-c7a932c9c12f rr:logicalTable _:node1bkguht02x6 ;
+	rr:subjectMap _:node1bkguht02x7 .
+
+_:node1bkguht02x1 km-dev:hasSubjectMap _:node1bkguht02x7 .
+
+_:node1bkguht02x7 km-dev:isPartOfMapping _:node1bkguht02x1 ;
+	a rr:SubjectMap ;
+	km-dev:alignmentNodeId "http://www.opengis.net/ont/geosparql#Geometry1" ;
+	rr:class geo:Geometry ;
+	rr:termType rr:BlankNode ;
+	km-dev:namePrefix "geo:Geometry1" .
+
+km-dev:PredicateObjectMap_075af97e-e791-4353-b480-236a54896b2d rr:predicate geo:asWKT .
+
+_:node1bkguht02x8 rr:column "WKT" ;
+	a rr:ObjectMap ;
+	km-dev:isPartOfMapping _:node1bkguht02x1 .
+
+_:node1bkguht02x1 km-dev:hasObjectMap _:node1bkguht02x8 .
+
+km-dev:PredicateObjectMap_075af97e-e791-4353-b480-236a54896b2d rr:objectMap _:node1bkguht02x8 .
+
+km-dev:TriplesMap_fd1f0f7d-5eab-4589-8e79-c7a932c9c12f rr:predicateObjectMap km-dev:PredicateObjectMap_075af97e-e791-4353-b480-236a54896b2d .
+
+km-dev:PredicateObjectMap_075af97e-e791-4353-b480-236a54896b2d a rr:PredicateObjectMap ;
+	km-dev:isPartOfMapping _:node1bkguht02x1 .
+
+_:node1bkguht02x1 km-dev:hasPredicateObjectMap km-dev:PredicateObjectMap_075af97e-e791-4353-b480-236a54896b2d .
