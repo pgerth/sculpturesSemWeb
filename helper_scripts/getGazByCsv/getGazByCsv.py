@@ -1,4 +1,17 @@
-#from SPARQLWrapper import SPARQLWrapper, JSON
+# author: Philipp Gerth
+#
+# The script is used to get a RDF Output from the iDAI.gazetteer REST API
+# based on the input csv file
+#
+# Parameters:
+# -c --csv= Obligatory parameter with the csv, which contains the gaz entries
+#
+# Example:
+#
+# python3 getGazByCsv.py -c 'gaz.csv'
+
+import sys, getopt
+import os
 import requests
 import csv
 import json
@@ -20,11 +33,3 @@ with open('gaz.csv', newline='') as csvfile:
         getGazRdf(row[0])
 
     f.close()
-
-'''
-for result in results["results"]["bindings"]:
-    print(result["label"]["value"])
-    print(result["place"]["value"])
-    gaz = gazLink(result["label"]["value"])
-    print(gaz)
-'''
