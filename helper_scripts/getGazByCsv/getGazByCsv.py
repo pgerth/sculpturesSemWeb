@@ -19,17 +19,43 @@ import xml.etree.ElementTree as ET
 
 
 # Function to extract the correspondent iDAI.gazetteer entity
-def getGazRdf(gazLink):
+def getGazRdf(gazLink, f):
     gazRequest = requests.get(gazLink + '.rdf')
     #,auth=('user', 'password').json()
     print(gazRequest.text)
     f.write(str(gazRequest.text))
 
-with open('gaz.csv', newline='') as csvfile:
-    csvReader = csv.reader(csvfile, delimiter=',')
-    f = open('myfile.rdf', 'w')
-    for row in csvReader:
-        print(row[0])
-        getGazRdf(row[0])
+# main function, for request parameter handling
+def main(argv):
+    gazCsv = 'gaz.csv'
+    export = 'export.rdf'
+    helpText = 'getGazByCsv.py -c <csv> [-e <export>]'
 
-    f.close()
+    # request parameter handling
+    try:
+        opts, args = getopt.getopt(argv,"hc:e:",["query=","export="])
+    except getopt.GetoptError:
+        print(helpText)
+        sys.exit(2)
+
+    for opt, arg in opts:
+        if opt == '-h':
+            print(helpText)
+            sys.exit()
+        elif opt in ("-c", "--csvfile"):
+            gazCsv = arg
+        elif opt in ("-e", "--export"):
+            export = arg
+
+
+    with open(gazCsv, newline='') as csvfile:
+        csvReader = csv.reader(csvfile, delimiter=',')
+        f = open(export, 'w')
+        for row in csvReader:
+            print(row[0])
+            getGazRdf(row[0], f)
+
+        f.close()
+
+if __name__ == "__main__":
+    main(sys.argv[1:])
