@@ -1,0 +1,6 @@
+Virtuoso 37000 Error SP030: SPARQL compiler, line 4: syntax error at '}'
+
+SPARQL query:
+define sql:big-data-const 0 
+#output-format:text/csv
+PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>  PREFIX aat: <http://vocab.getty.edu/aat/> Prefix ogc: <http://www.opengis.net/ont/geosparql#> SELECT ?province ?title (count(?object) as ?objectCount) WHERE {   ?object crm:P2_has_type aat:300047090; # object is of type "sculpture"   crm:P53_has_former_or_current_location ?gaz ;   crm:P45_consists_of aat:300011571 . # object is made of pentelic marble   ?gaz ogc:hasGeometry [ ogc:asWKT ?gazWkt ] .   ?province crm:P2_has_type aat:300387096 ; # place is of type "imperial province"   crm:P1_is_identified_by ?title .   ?province ogc:hasGeometry [ ogc:asWKT ?polygon ] .    Filter(bif:st_intersects (?gazWkt, bif:st_geomFromText(?polygon))) . } GROUP BY ?province ?title ORDER BY DESC(?objectCount) 
