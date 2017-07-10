@@ -1,0 +1,18 @@
+PREFIX ogc: <http://www.opengis.net/ont/geosparql#>
+PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
+PREFIX aat: <http://vocab.getty.edu/aat/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+
+SELECT ?object (count(?object) AS ?countRoad) ?gazWkt
+WHERE {
+  ?object crm:P102_has_title ?title;
+  crm:P53_has_former_or_current_location ?gaz .
+  ?road crm:P2_has_type aat:300008217 .
+  ?road ogc:hasGeometry ?roadGeo .
+  ?roadGeo ogc:asWKT ?roadWkt .
+  ?gaz ogc:hasGeometry [ogc:asWKT ?gazWkt] .
+  FILTER( bif:st_intersects(?gazWkt, bif:st_geomfromtext(?roadWkt), 0.01))
+  FILTER regex (?title, "herme ", "i")
+}
+GROUP BY ?object ?gazWkt
+ORDER BY DESC(?countRoad)
