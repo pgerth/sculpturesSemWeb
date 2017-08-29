@@ -1,1 +1,1 @@
-# sculpturesSemWeb
+Github Repository für die Datenintegration von "Cultural Heritage Data" mit dem klassischen Linked Open Data Stack: Zur Transformation der Ursprungsdaten in RDF/XML und nTriples wird u.a. die Software Karma verwendet, deren Mapping Dateien sich im Mapping Ordner befinden. Virtuoso dient als Backend zur Speicherung der Triples.
